@@ -1,0 +1,582 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sadam Hussein - Computer Science | Web Developer</title>
+    
+    <!-- Fonts & Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Loading Animation -->
+    <div class="loader-wrapper">
+        <div class="loader">
+            <div class="loader-circle"></div>
+            <div class="loader-text">SH</div>
+        </div>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- AI Background Canvas -->
+    <canvas id="ai-background"></canvas>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <div class="logo-icon">SH</div>
+                <div class="logo-text">
+                    <span class="logo-main">Sadam Hussein</span>
+                    <span class="logo-sub">Computer Science Student</span>
+                </div>
+            </div>
+
+            <div class="nav-links">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+
+            <div class="nav-actions">
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-particles" id="particles-js"></div>
+        <div class="container">
+            <div class="hero-wrapper">
+                <div class="hero-content" data-aos="fade-right">
+                    <div class="hero-badge">
+                        <span class="badge-pulse"></span>
+                        <span>Computer Science Student</span>
+                    </div>
+                    
+                    <h1 class="hero-title">
+                        Hi, I'm <span class="gradient-text">Sadam Hussein</span>
+                    </h1>
+                    
+                    <h2 class="hero-subtitle">Web Developer & AI Enthusiast</h2>
+                    
+                    <p class="hero-description">
+                        Computer Science student passionate about creating beautiful, functional, and intelligent web applications. 
+                        Specializing in AI integration and modern web development.
+                    </p>
+
+                    <div class="hero-info">
+                        <div class="info-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>sadamhussein1250@gmail.com</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-phone"></i>
+                            <span>0713270110</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>Computer Science Student</span>
+                        </div>
+                    </div>
+
+
+<div class="hero-stats">
+                        <div class="stat">
+                            <span class="stat-value">3+</span>
+                            <span class="stat-label">Years Coding</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">15+</span>
+                            <span class="stat-label">Projects</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">5+</span>
+                            <span class="stat-label">AI Apps</span>
+                        </div>
+                    </div>
+
+                    <div class="hero-buttons">
+                        <button class="btn btn-primary" id="chatWithAI">
+                            <i class="fas fa-robot"></i>
+                            Chat with AI
+                        </button>
+                        <a href="#projects" class="btn btn-outline">
+                            <i class="fas fa-code"></i>
+                            View Work
+                        </a>
+                    </div>
+
+                    <div class="hero-social">
+                        <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <div class="hero-image" data-aos="fade-left">
+                    <div class="image-wrapper">
+                        <div class="profile-card">
+                            <div class="profile-icon">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <h3>Sadam Hussein</h3>
+                            <p>Computer Science Student</p>
+                            
+                            <div class="profile-contact">
+                                <div><i class="fas fa-envelope"></i> sadamhussein1250@gmail.com</div>
+                                <div><i class="fas fa-phone"></i> 0713270110</div>
+                            </div>
+
+                            <div class="profile-stats">
+                                <div class="stat">
+                                    <span class="stat-value">3+</span>
+                                    <span class="stat-label">Years</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-value">15+</span>
+                                    <span class="stat-label">Projects</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-value">10+</span>
+                                    <span class="stat-label">Clients</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Floating Elements -->
+                        <div class="floating-element element-1">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <div class="floating-element element-2">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="floating-element element-3">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+<!-- AI Quick Chat Widget -->
+    <div class="ai-quick-chat" id="quickChat">
+        <div class="chat-header">
+            <i class="fas fa-robot"></i>
+            <span>AI Assistant</span>
+            <button class="close-chat"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <div class="message ai-message">
+                <div class="message-content">
+                    Hi! I'm Sadam's AI assistant. Ask me anything about his skills or projects!
+                </div>
+            </div>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="userMessage" placeholder="Ask me something...">
+            <button id="sendMessage"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge">ABOUT ME</span>
+                <h2 class="section-title">Computer Science <span class="gradient-text">Student</span></h2>
+                <p class="section-subtitle">Passionate about AI and Web Development</p>
+            </div>
+
+            <div class="about-wrapper">
+                <div class="about-content" data-aos="fade-right">
+                    <h3>Who is Sadam Hussein?</h3>
+                    <p>I'm a Computer Science student with a deep passion for AI integration and web development. I love creating intelligent applications that solve real-world problems and make a difference in people's lives.</p>
+                    
+                    <p>My journey in tech started 3 years ago, and since then I've worked on various projects ranging from small business websites to AI-powered applications. I believe in continuous learning and staying up-to-date with the latest technologies.</p>
+
+                    <div class="about-info">
+                        <div class="info-box">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <h4>Email</h4>
+                                <p>sadamhussein1250@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="info-box">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <h4>Phone</h4>
+                                <p>0713270110</p>
+                            </div>
+                        </div>
+                        <div class="info-box">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <h4>Location</h4>
+                                <p>Available for Remote Work</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="about-features">
+                        <div class="feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>AI Integration</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Web Development</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Problem Solving</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="about-stats" data-aos="fade-left">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+
+<i class="fas fa-code"></i>
+                            </div>
+                            <div class="stat-number" data-target="15">15</div>
+                            <div class="stat-label">Projects Done</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <div class="stat-number" data-target="5">5</div>
+                            <div class="stat-label">AI Apps</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="stat-number" data-target="10">10</div>
+                            <div class="stat-label">Happy Clients</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="stat-number" data-target="1000">1000+</div>
+                            <div class="stat-label">Hours Coding</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills" id="skills">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge">MY SKILLS</span>
+                <h2 class="section-title">Technical <span class="gradient-text">Expertise</span></h2>
+                <p class="section-subtitle">Tools and technologies I work with</p>
+            </div>
+
+            <div class="skills-wrapper">
+                <div class="skill-category" data-aos="fade-right">
+                    <h3><i class="fas fa-code"></i> Web Development</h3>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <span>HTML5 & CSS3</span>
+                            <div class="progress-bar"><div class="progress" style="width: 95%"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <span>JavaScript</span>
+                            <div class="progress-bar"><div class="progress" style="width: 90%"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <span>React.js</span>
+                            <div class="progress-bar"><div class="progress" style="width: 85%"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <span>Node.js</span>
+                            <div class="progress-bar"><div class="progress" style="width: 80%"></div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-category" data-aos="fade-left">
+                    <h3><i class="fas fa-robot"></i> AI & Integration</h3>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <span>Gemini AI</span>
+                            <div class="progress-bar"><div class="progress" style="width: 90%"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <span>OpenAI API</span>
+                            <div class="progress-bar"><div class="progress" style="width: 85%"></div></div>
+
+</div>
+                        <div class="skill-item">
+                            <span>Prompt Engineering</span>
+                            <div class="progress-bar"><div class="progress" style="width: 88%"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <span>AI Integration</span>
+                            <div class="progress-bar"><div class="progress" style="width: 85%"></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="skills-tags" data-aos="fade-up">
+                <span class="skill-tag">Responsive Design</span>
+                <span class="skill-tag">UI/UX Design</span>
+                <span class="skill-tag">Git & GitHub</span>
+                <span class="skill-tag">RESTful APIs</span>
+                <span class="skill-tag">MongoDB</span>
+                <span class="skill-tag">SQL</span>
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">Problem Solving</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Showcase Section -->
+    <section class="ai-showcase" id="ai-showcase">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge">AI POWERED</span>
+                <h2 class="section-title">Live <span class="gradient-text">AI Assistant</span></h2>
+                <p class="section-subtitle">Powered by Google Gemini AI - Try it now!</p>
+            </div>
+
+            <div class="ai-interface" data-aos="fade-up">
+                <div class="ai-tabs">
+                    <button class="ai-tab active" data-tab="chat">💬 AI Chat</button>
+                    <button class="ai-tab" data-tab="code">💻 Code Helper</button>
+                    <button class="ai-tab" data-tab="analyze">📊 Text Analyzer</button>
+                </div>
+
+                <div class="ai-content active" id="chatTab">
+                    <div class="ai-chat-interface">
+                        <div class="ai-chat-messages" id="aiChatMessages">
+                            <div class="message ai">
+                                <div class="avatar"><i class="fas fa-robot"></i></div>
+                                <div class="bubble">Hello! I'm Sadam's AI assistant. How can I help you today?</div>
+                            </div>
+                        </div>
+                        <div class="ai-chat-input">
+                            <input type="text" id="aiChatInput" placeholder="Ask me anything about Sadam...">
+                            <button id="sendAIMessage"><i class="fas fa-paper-plane"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ai-content" id="codeTab">
+                    <div class="code-helper">
+                        <textarea id="codeInput" placeholder="Describe what code you need... (e.g., 'Create a React button component')"></textarea>
+                        <button id="generateCode" class="btn btn-primary">Generate Code <i class="fas fa-magic"></i></button>
+                        <div class="code-output" id="codeOutput"></div>
+                    </div>
+                </div>
+
+                <div class="ai-content" id="analyzeTab">
+                    <div class="analyzer">
+                        <textarea id="analyzeInput" placeholder="Paste text to analyze..."></textarea>
+                        <button id="analyzeBtn" class="btn btn-primary">Analyze <i class="fas fa-search"></i></button>
+                        <div class="analyze-result" id="analyzeResult"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+<!-- Projects Section -->
+    <section class="projects" id="projects">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge">MY WORK</span>
+                <h2 class="section-title">Featured <span class="gradient-text">Projects</span></h2>
+                <p class="section-subtitle">Here are some of my recent projects</p>
+            </div>
+
+            <div class="projects-grid">
+                <div class="project-card" data-aos="fade-up">
+                    <div class="project-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>AI Chat Assistant</h3>
+                    <p>Gemini-powered chatbot with context awareness and memory</p>
+
+<div class="project-tech">
+                        <span>Gemini AI</span>
+                        <span>JavaScript</span>
+                        <span>HTML/CSS</span>
+                    </div>
+                </div>
+
+                <div class="project-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="project-icon">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <h3>TaskFlow - To-Do App</h3>
+                    <p>Modern task management with dark mode and local storage</p>
+                    <div class="project-tech">
+                        <span>HTML5</span>
+                        <span>CSS3</span>
+                        <span>JavaScript</span>
+                    </div>
+                </div>
+
+                <div class="project-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="project-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <h3>E-Commerce Platform</h3>
+                    <p>Full-stack e-commerce website with payment integration</p>
+                    <div class="project-tech">
+                        <span>React</span>
+                        <span>Node.js</span>
+                        <span>MongoDB</span>
+                    </div>
+                </div>
+
+                <div class="project-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="project-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <h3>Smart Text Analyzer</h3>
+                    <p>AI-powered text analysis with sentiment detection</p>
+                    <div class="project-tech">
+                        <span>Gemini AI</span>
+                        <span>JavaScript</span>
+                        <span>API</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="projects-more" data-aos="fade-up">
+                <a href="#" class="btn btn-outline">View All Projects <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge">GET IN TOUCH</span>
+                <h2 class="section-title">Contact <span class="gradient-text">Sadam Hussein</span></h2>
+                <p class="section-subtitle">Have a project in mind? Let's discuss it!</p>
+            </div>
+
+            <div class="contact-wrapper">
+                <div class="contact-info" data-aos="fade-right">
+                    <div class="info-card">
+                        <i class="fas fa-envelope"></i>
+                        <h3>Email</h3>
+                        <p>sadamhussein1250@gmail.com</p>
+                        <a href="mailto:sadamhussein1250@gmail.com">Send Message</a>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-phone-alt"></i>
+                        <h3>Phone</h3>
+                        <p>0713270110</p>
+                        <a href="tel:0713270110">Call Now</a>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-graduation-cap"></i>
+                        <h3>Education</h3>
+                        <p>Computer Science Student</p>
+                    </div>
+                </div>
+
+                <div class="contact-form-container" data-aos="fade-left">
+                    <form id="contactForm">
+                        <input type="text" id="name" placeholder="Your Name" required>
+                        <input type="email" id="email" placeholder="Your Email" required>
+<select id="interest" required>
+                            <option value="">Interested in...</option>
+                            <option value="web">Web Development</option>
+                            <option value="ai">AI Integration</option>
+                            <option value="other">Other</option>
+                        </select>
+                        <textarea id="message" rows="5" placeholder="Your Message" required></textarea>
+                        <button type="submit" class="btn btn-primary btn-full">
+                            Send Message <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <div class="logo-icon">SH</div>
+                    <div>
+                        <h3>Sadam Hussein</h3>
+                        <p>Computer Science Student & Web Developer</p>
+                    </div>
+                </div>
+
+                <div class="footer-links">
+                    <a href="#home">Home</a>
+                    <a href="#about">About</a>
+                    <a href="#skills">Skills</a>
+                    <a href="#projects">Projects</a>
+                    <a href="#contact">Contact</a>
+                </div>
+
+                <div class="footer-social">
+                    <a href="https://github.com/sadam-h876"><i class="fab fa-github"></i></a>
+                    <a href="https://linkedin/in/ Sadam Hussen/"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 Sadam Hussein. All rights reserved.</p>
+                <p>Email: sadamhussein1250@gmail.com | Phone: 0713270110</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
