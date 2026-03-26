@@ -1,429 +1,461 @@
-
-// ===========================================
+ // ===========================================
 // GEMINI AI CONFIGURATION
 // ===========================================
+
+// Your Gemini API Key (from default project)
 const GEMINI_API_KEY = 'AIzaSyBMGepsBr9Zbb4Fk_jktya5_Vxzq9U61z4';
 
 // ===========================================
-// WAIT FOR PAGE TO LOAD
+// INITIALIZE AOS ANIMATIONS
 // ===========================================
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('✅ Page loaded successfully');
-    console.log('👤 Sadam Hussein - Computer Science Student');
-    console.log('📧 sadamhussein1250@gmail.com');
-    console.log('📱 0713270110');
-    
-    // Initialize AOS if available
-    if (typeof AOS !== 'undefined') {
-        AOS.init({
-            duration: 1000,
-            once: true
-        });
-    }
-    
-    // Initialize Particles if available
-    if (typeof particlesJS !== 'undefined' && document.getElementById('particles-js')) {
-        initParticles();
-    }
-    
-    // Initialize all features
-    initLoader();
-    initCustomCursor();
-    initAIBackground();
-    initQuickChat();
-    initMainAI();
-    initCodeGenerator();
-    initTextAnalyzer();
-    initThemeToggle();
-    initMobileMenu();
-    initContactForm();
-    initScrollEffects();
-    initBackToTop();
-    initStatsCounter();
+AOS.init({
+    duration: 1000,
+    once: true,
+    offset: 100
 });
-
-// ===========================================
-// PARTICLES INITIALIZATION
-// ===========================================
-function initParticles() {
-    particlesJS('particles-js', {
-        particles: {
-            number: { value: 80, density: { enable: true, value_area: 800 } },
-            color: { value: '#6366f1' },
-            shape: { type: 'circle' },
-            opacity: { value: 0.5, random: false },
-            size: { value: 3, random: true },
-            line_linked: {
-                enable: true,
-                distance: 150,
-                color: '#6366f1',
-                opacity: 0.4,
-                width: 1
-            },
-            move: {
-                enable: true,
-                speed: 2,
-                direction: 'none',
-                random: false,
-                straight: false,
-                out_mode: 'out',
-                bounce: false
-            }
-        },
-        interactivity: {
-            detect_on: 'canvas',
-            events: {
-                onhover: { enable: true, mode: 'grab' },
-                onclick: { enable: true, mode: 'push' },
-                resize: true
-            },
-            modes: {
-                grab: { distance: 140, line_linked: { opacity: 1 } },
-                push: { particles_nb: 4 }
-            }
-        },
-        retina_detect: true
-    });
-}
-
-// ===========================================
-// LOADER
-// ===========================================
-function initLoader() {
-    const loader = document.querySelector('.loader-wrapper');
-    if (loader) {
-        setTimeout(function() {
-            loader.classList.add('fade-out');
-        }, 1000);
-    }
-}
-
-// ===========================================
-// CUSTOM CURSOR
-// ===========================================
-function initCustomCursor() {
-    const cursor = document.querySelector('.cursor');
-    const follower = document.querySelector('.cursor-follower');
-    
-    if (!cursor || !follower) return;
-    
-    document.addEventListener('mousemove', function(e) {
-        cursor.style.transform = 'translate(' + e.clientX + 'px, ' + e.clientY + 'px)';
-        follower.style.transform = 'translate(' + (e.clientX - 20) + 'px, ' + (e.clientY - 20) + 'px)';
-    });
-    
-    document.addEventListener('mousedown', function() {
-        cursor.style.transform += ' scale(0.8)';
-        follower.style.transform += ' scale(1.5)';
-    });
-    
-    document.addEventListener('mouseup', function() {
-        cursor.style.transform = cursor.style.transform.replace(' scale(0.8)', '');
-        follower.style.transform = follower.style.transform.replace(' scale(1.5)', '');
-
-});
-    
-    const hoverElements = document.querySelectorAll('a, button, .project-card, .skill-tag, .info-card');
-    for (let i = 0; i < hoverElements.length; i++) {
-        hoverElements[i].addEventListener('mouseenter', function() {
-            cursor.style.transform += ' scale(1.5)';
-            follower.style.transform += ' scale(2)';
-        });
-        
-        hoverElements[i].addEventListener('mouseleave', function() {
-            cursor.style.transform = cursor.style.transform.replace(' scale(1.5)', '');
-            follower.style.transform = follower.style.transform.replace(' scale(2)', '');
-        });
-    }
-}
 
 // ===========================================
 // AI BACKGROUND CANVAS
 // ===========================================
-function initAIBackground() {
-    const canvas = document.getElementById('ai-background');
-    if (!canvas) return;
-    
+const canvas = document.getElementById('ai-background');
+if (canvas) {
     const ctx = canvas.getContext('2d');
-    let width = window.innerWidth;
-    let height = window.innerHeight;
-    let particles = [];
     
-    function resize() {
-        width = window.innerWidth;
-        height = window.innerHeight;
-        canvas.width = width;
-        canvas.height = height;
+    function setCanvasSize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
     }
     
-    function createParticles() {
-        particles = [];
-        for (let i = 0; i < 50; i++) {
-            particles.push({
-                x: Math.random() * width,
-                y: Math.random() * height,
-                vx: (Math.random() - 0.5) * 0.3,
-                vy: (Math.random() - 0.5) * 0.3,
-                size: Math.random() * 2 + 1
-            });
+    setCanvasSize();
+    
+    class Particle {
+        constructor() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.vx = (Math.random() - 0.5) * 0.5;
+            this.vy = (Math.random() - 0.5) * 0.5;
+            this.size = Math.random() * 2;
+            this.color = rgba(139, 92, 246, $|{Math:random() * 0.5});
         }
-    }
-    
-    function draw() {
-        ctx.clearRect(0, 0, width, height);
         
-        for (let i = 0; i < particles.length; i++) {
-            var p = particles[i];
-            p.x += p.vx;
-            p.y += p.vy;
+        update() {
+            this.x += this.vx;
+            this.y += this.vy;
             
-            if (p.x < 0 || p.x > width) p.vx *= -1;
-            if (p.y < 0 || p.y > height) p.vy *= -1;
-            
+            if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+            if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+        }
+        
+        draw() {
             ctx.beginPath();
-            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-            ctx.fillStyle = 'rgba(99, 102, 241, 0.3)';
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fillStyle = this.color;
             ctx.fill();
         }
-        
-        requestAnimationFrame(draw);
     }
     
-    resize();
-    createParticles();
-    draw();
+    const particles = [];
+    for (let i = 0; i < 100; i++) {
+        particles.push(new Particle());
+    }
     
-    window.addEventListener('resize', function() {
-        resize();
-        createParticles();
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        particles.forEach(particle => {
+            particle.update();
+            particle.draw();
+        });
+        
+        // Draw connections between particles
+        particles.forEach((p1, i) => {
+            particles.slice(i + 1).forEach(p2 => {
+                const dx = p1.x - p2.x;
+                const dy = p1.y - p2.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                
+                if (distance < 100) {
+                    ctx.beginPath();
+                    ctx.strokeStyle = rgba(139, 92, 246, $|{0.2 :(1 - distance / 100)});
+                    ctx.lineWidth = 1;
+                    ctx.moveTo(p1.x, p1.y);
+                    ctx.lineTo(p2.x, p2.y);
+                    ctx.stroke();
+                }
+            });
+        });
+        
+        requestAnimationFrame(animate);
+    }
+    
+    animate();
+    
+    window.addEventListener('resize', () => {
+        setCanvasSize();
     });
 }
 
 // ===========================================
-// GEMINI AI FUNCTION
+// GEMINI AI CHAT FUNCTION
 // ===========================================
-async function chatWithGemini(message) {
+
+/**
+ * Main AI Chat Function - Uses Google Gemini AI
+ * @param {string} userMessage - The message from user
+ * @returns {string} - AI response
+ */
+async function chatWithGemini(userMessage) {
     try {
-        const response = await fetch(
-            'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=' + GEMINI_API_KEY,
+        // Show loading state in console
+        console.log('🤖 Sending message to Gemini AI...');
+        
+        const response = await fetch({
+            https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${GEMINI_API_KEY},
             {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
                     contents: [{
                         parts: [{
-                            text: 'You are an AI assistant for Sadam Hussein. Sadam is a Computer Science student and web developer. His email is sadamhussein1250@gmail.com and phone is 0713270110. User question: ' + message
+                            text: `You are an AI assistant for Sadam Hussein. 
+                            
+                            PERSONAL INFORMATION:
+[3/5/2026 11:49 PM] @SDM.H: - Name: Sadam Hussein
+                            - Role: Computer Science Student & Web Developer
+                            - Email: sadamhussein1250@gmail.com
+                            - Phone: 0713270110
+                            - Skills: AI Integration, Web Development, HTML, CSS, JavaScript, React, Node.js, Python
+                            - Projects: TaskFlow To-Do App, AI Chat Assistant, E-Commerce Platform, Weather Dashboard
+                            
+                            INSTRUCTIONS:
+                            - Be friendly, professional, and helpful
+                            - Answer questions about Sadam's skills and experience
+                            - If asked for contact info, provide the email and phone above
+                            - Keep responses concise but informative
+                            - If you don't know something, say so honestly
+                            
+                            USER QUESTION: ${userMessage}
+                            
+                            RESPONSE:`
                         }]
                     }]
                 })
             }
-        );
-        
+    });
+
+        // Check if response is OK
         if (!response.ok) {
-            throw new Error('API error');
+            const errorData = await response.text();
+            console.error('API Error:', errorData);
+            return "I'm having trouble connecting right now. Please try again in a moment.";
         }
-        
+
         const data = await response.json();
-        if (data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts && data.candidates[0].content.parts[0]) {
-            return data.candidates[0].content.parts[0].text;
-        } else {
-            return "I received an unexpected response. Please try again.";
-        }
         
+        // Validate response structure
+        if (data.candidates && 
+            data.candidates[0] && 
+            data.candidates[0].content && 
+            data.candidates[0].content.parts && 
+            data.candidates[0].content.parts[0]) {
+            
+            const aiResponse = data.candidates[0].content.parts[0].text;
+            console.log('✅ AI Response received:', aiResponse.substring(0, 50) + '...');
+            return aiResponse;
+        } else {
+            console.error('Unexpected API response structure:', data);
+            return "I received an unexpected response. Please try asking differently.";
+        }
+
     } catch (error) {
-        console.error('AI Error:', error);
-        return "I'm having trouble connecting. Please try again.";
-    }
-}
-// ===========================================
-// QUICK CHAT WIDGET
-// ===========================================
-function initQuickChat() {
-    const chatBtn = document.getElementById('chatWithAI');
-    const chatBox = document.getElementById('quickChat');
-    const closeBtn = document.querySelector('.close-chat');
-    const sendBtn = document.getElementById('sendMessage');
-    const input = document.getElementById('userMessage');
-    const messages = document.getElementById('chatMessages');
-    
-    if (!chatBtn || !chatBox || !closeBtn || !sendBtn || !input || !messages) return;
-    
-    chatBtn.addEventListener('click', function() {
-        chatBox.style.display = 'block';
-    });
-    
-    closeBtn.addEventListener('click', function() {
-        chatBox.style.display = 'none';
-    });
-    
-    sendBtn.addEventListener('click', async function() {
-        const text = input.value.trim();
-        if (text === '') return;
+        console.error('❌ Gemini AI Error:', error);
         
-        addQuickMessage('user', text);
-        input.value = '';
-        
-        const thinkingId = addQuickMessage('ai', '...', true);
-        
-        const response = await chatWithGemini(text);
-        
-        const thinkingMsg = document.getElementById(thinkingId);
-        if (thinkingMsg) thinkingMsg.remove();
-        
-        addQuickMessage('ai', response);
-    });
-    
-    input.addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') {
-            sendBtn.click();
-        }
-    });
-    
-    function addQuickMessage(sender, text, isLoading) {
-        const id = 'msg-' + Date.now() + '-' + Math.random();
-        const div = document.createElement('div');
-        div.id = id;
-        div.className = 'message ' + sender + '-message';
-        
-        const contentDiv = document.createElement('div');
-        contentDiv.className = 'message-content';
-        
-        if (isLoading) {
-            contentDiv.innerHTML = '<span class="dot"></span><span class="dot"></span><span class="dot"></span>';
+        // User-friendly error messages
+        if (error.message.includes('Failed to fetch')) {
+            return "⚠️ Network error. Please check your internet connection.";
+        } else if (error.message.includes('API key')) {
+            return "⚠️ API key error. Please check configuration.";
         } else {
-            contentDiv.textContent = text;
+            return "😔 Sorry, I encountered an error. Please try again later.";
         }
-        
-        div.appendChild(contentDiv);
-        messages.appendChild(div);
-        messages.scrollTop = messages.scrollHeight;
-        return id;
     }
 }
 
 // ===========================================
-// MAIN AI ASSISTANT
+// TEST AI CONNECTION
 // ===========================================
-function initMainAI() {
-    const input = document.getElementById('aiChatInput');
-    const sendBtn = document.getElementById('sendAIMessage');
-    const messages = document.getElementById('aiChatMessages');
+
+async function testAIConnection() {
+    console.log('🔍 Testing Gemini AI connection...');
+    console.log('Using API Key:', GEMINI_API_KEY.substring(0, 15) + '...');
     
-    if (!input || !sendBtn || !messages) return;
+    const response = await chatWithGemini("Hello! Please introduce yourself briefly.");
+    console.log('📨 Test Response:', response);
     
-    sendBtn.addEventListener('click', async function() {
-        const text = input.value.trim();
-        if (text === '') return;
-        
-        addMainMessage('user', text);
-        input.value = '';
-        
-        const thinkingDiv = addMainMessage('ai', '...', true);
-        
-        const response = await chatWithGemini(text);
-        
-        if (thinkingDiv && thinkingDiv.parentNode) {
-            thinkingDiv.remove();
-        }
-        
-        addMainMessage('ai', response);
-    });
-    
-    input.addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') {
-            sendBtn.click();
-        }
-    });
-    
-    function addMainMessage(sender, text, isLoading) {
-        const div = document.createElement('div');
-        div.className = 'message ' + sender;
-        
-        const avatar = document.createElement('div');
-        avatar.className = 'avatar';
-        
-        const icon = document.createElement('i');
-        icon.className = 'fas fa-' + (sender === 'user' ? 'user' : 'robot');
-        avatar.appendChild(icon);
-        
-        const bubble = document.createElement('div');
-        bubble.className = 'bubble';
-        
-        if (isLoading) {
-            bubble.textContent = '...';
-        } else {
-            bubble.textContent = text;
-        }
-        
-        div.appendChild(avatar);
-        div.appendChild(bubble);
-        messages.appendChild(div);
-        messages.scrollTop = messages.scrollHeight;
-        return div;
+    if (response && !response.includes('error')) {
+        console.log('✅ Gemini AI is working perfectly!');
+    } else {
+        console.log('❌ Gemini AI test failed');
     }
 }
+
+// Run test when page loads (but don't show to user)
+setTimeout(testAIConnection, 2000);
+
 // ===========================================
-// CODE GENERATOR
+// QUICK CHAT WIDGET (Bottom Right)
 // ===========================================
-function initCodeGenerator() {
-    const btn = document.getElementById('generateCode');
-    const input = document.getElementById('codeInput');
-    const output = document.getElementById('codeOutput');
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Elements
+    const chatWithAI = document.getElementById('chatWithAI');
+    const quickChat = document.getElementById('quickChat');
+    const closeChat = document.querySelector('.close-chat');
+    const sendMessage = document.getElementById('sendMessage');
+ const userMessage = document.getElementById('userMessage');
+    const chatMessages = document.getElementById('chatMessages');
     
-    if (!btn || !input || !output) return;
+    // Check if elements exist
+    if (!chatWithAI || !quickChat||  !closeChat || !sendMessage || !userMessage || !chatMessages) {
+        console.log('Chat elements not found - continuing without chat');
+        return;
+    }
     
-    btn.addEventListener('click', async function() {
-        const prompt = input.value.trim();
-        if (prompt === '') return;
+    // Toggle chat window
+    chatWithAI.addEventListener('click', () => {
+        quickChat.classList.toggle('active');
+    });
+    
+    // Close chat
+    closeChat.addEventListener('click', () => {
+        quickChat.classList.remove('active');
+    });
+    
+    // Send message function
+    async function handleSendMessage() {
+        const message = userMessage.value.trim();
+        if (!message) return;
         
-        output.innerHTML = '<div class="loading"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>';
+        // Clear input
+        userMessage.value = '';
         
-        const response = await chatWithGemini('Write code for: ' + prompt + '. Provide clean code with comments.');
+        // Add user message
+        addMessage('user', message);
         
-        output.innerHTML = '<pre><code>' + escapeHtml(response) + '</code></pre>';
+        // Show typing indicator
+        const typingId = addMessage('ai', '🤔 Thinking...', true);
+        
+        try {
+            // Get AI response
+            const response = await chatWithGemini(message);
+            
+            // Remove typing indicator
+            removeMessage(typingId);
+            
+            // Add AI response
+            addMessage('ai', response);
+            
+        } catch (error) {
+            // Remove typing indicator
+            removeMessage(typingId);
+            
+            // Show error
+            addMessage('ai', '😔 Sorry, I encountered an error. Please try again.');
+        }
+    }
+    
+    // Send button click
+    sendMessage.addEventListener('click', handleSendMessage);
+    
+    // Enter key to send
+    userMessage.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            handleSendMessage();
+        }
+    });
+    
+    // Helper function to add message
+    function addMessage(sender, text, isLoading = false) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = message |$|{sender}-message;
+        
+        if (isLoading) {
+            messageDiv.innerHTML = 
+                <div class="message-content loading">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+            ;
+        } else {
+            messageDiv.innerHTML = <div class="message-content">${text}</div>;
+        }
+        
+        chatMessages.appendChild(messageDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+        
+        return messageDiv;
+    }
+    
+    // Helper function to remove message
+    function removeMessage(messageElement) {
+        if (messageElement && messageElement.parentNode) {
+            messageElement.parentNode.removeChild(messageElement);
+        }
+    }
+});
+
+// ===========================================
+// MAIN AI ASSISTANT SECTION (Center)
+// ===========================================
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Elements
+    const aiChatInput = document.getElementById('aiChatInput');
+    const sendAIMessage = document.getElementById('sendAIMessage');
+    const aiChatMessages = document.getElementById('aiChatMessages');
+    const aiTabs = document.querySelectorAll('.ai-tab');
+    const aiContents = document.querySelectorAll('.ai-content');
+    
+    // AI Tabs functionality
+    if (aiTabs.length > 0 && aiContents.length > 0) {
+        aiTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const tabId = tab.dataset.tab;
+                
+                // Remove active class from all tabs
+                aiTabs.forEach(t => t.classList.remove('active'));
+                
+                // Remove active class from all contents
+ aiContents.forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked tab
+                tab.classList.add('active');
+                
+                // Show corresponding content
+                document.getElementById(tabId + 'Tab')?.classList.add('active');
+            });
+        });
+    }
+    
+    // Main AI Chat functionality
+    if (aiChatInput && sendAIMessage && aiChatMessages) {
+        
+        async function handleMainAIChat() {
+            const message = aiChatInput.value.trim();
+            if (!message) return;
+            
+            // Add user message
+            const userDiv = document.createElement('div');
+            userDiv.className = 'message user';
+            userDiv.innerHTML = 
+                '<div class="avatar"><i class="fas fa-user"></i></div>'
+                '<div class="bubble">${message}</div>'
+            ;
+            aiChatMessages.appendChild(userDiv);
+            
+            aiChatInput.value = '';
+            
+            // Show loading
+            const loadingDiv = document.createElement('div');
+            loadingDiv.className = 'message ai';
+            loadingDiv.innerHTML = 
+                '<div class="avatar"><i class="fas fa-robot"></i></div>'
+                '<div class="bubble">...</div>'
+            ;
+            aiChatMessages.appendChild(loadingDiv);
+            
+            // Scroll to bottom
+            aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
+            
+            // Get AI response
+            const response = await chatWithGemini(message);
+            
+            // Remove loading
+            aiChatMessages.removeChild(loadingDiv);
+            
+            // Add AI response
+            const aiDiv = document.createElement('div');
+            aiDiv.className = 'message ai';
+            aiDiv.innerHTML = 
+                '<div class="avatar"><i class="fas fa-robot"></i></div>'
+               ' <div class="bubble">${response}</div>'
+            ;
+            aiChatMessages.appendChild(aiDiv);
+            
+            // Scroll to bottom
+            aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
+        }
+        
+        sendAIMessage.addEventListener('click', handleMainAIChat);
+        
+        aiChatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                handleMainAIChat();
+            }
+        });
+    }
+});
+
+// ===========================================
+// CODE GENERATOR (Mock - Replace with real AI)
+// ===========================================
+
+const generateCode = document.getElementById('generateCode');
+const codeInput = document.getElementById('codeInput');
+const codeOutput = document.getElementById('codeOutput');
+
+if (generateCode && codeInput && codeOutput) {
+    generateCode.addEventListener('click', async () => {
+        const prompt = codeInput.value.trim();
+        if (!prompt) return;
+        
+        codeOutput.innerHTML = '<div class="loading">Generating code with AI...</div>';
+        
+        // Use Gemini to generate code
+        const response = await chatWithGemini(
+            Generate |code_for. $|{prompt}. Provide |clean, working |code_with |comments
+        );
+        
+        codeOutput.innerHTML = <pre><code>${response.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</code></pre>;
     });
 }
 
 // ===========================================
 // TEXT ANALYZER
 // ===========================================
-function initTextAnalyzer() {
-    const btn = document.getElementById('analyzeBtn');
-    const input = document.getElementById('analyzeInput');
-    const output = document.getElementById('analyzeResult');
-    
-    if (!btn  || !input || !output) return;
-    
-    btn.addEventListener('click', async function() {
-        const text = input.value.trim();
-        if (text === '') return;
+
+const analyzeBtn = document.getElementById('analyzeBtn');
+const analyzeInput = document.getElementById('analyzeInput');
+const analyzeResult = document.getElementById('analyzeResult');
+
+if (analyzeBtn && analyzeInput && analyzeResult) {
+    analyzeBtn.addEventListener('click', async () => {
+        const text = analyzeInput.value.trim();
+         if (!text) return;
         
-        output.innerHTML = '<div class="loading"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>';
+        analyzeResult.innerHTML = '<div class="loading">Analyzing text with AI...</div>';
         
-        const response = await chatWithGemini('Analyze this text. Provide: 1) Main topic, 2) Sentiment, 3) Key points, 4) Summary.\n\nText: ' + text);
+        // Use Gemini to analyze
+        const response = await chatWithGemini((
+            Analyze |this |text |and |provide ,1) [Main |topic , Sentiment, Key_points, 4||Summary|nText], $text
+        );
         
-        output.innerHTML = '<div class="analysis-result">' + response.replace(/\n/g, '<br>') + '</div>';
+        analyzeResult.innerHTML = <div class="analysis-result">${response.replace(/\n/g, '<br>')}</div>;
     });
 }
 
 // ===========================================
 // THEME TOGGLE
 // ===========================================
-function initThemeToggle() {
-    const toggle = document.getElementById('themeToggle');
-    if (!toggle) return;
+
+const themeToggle = document.getElementById('themeToggle');
+if (themeToggle) {
+    const icon = themeToggle.querySelector('i');
     
-    const icon = toggle.querySelector('i');
-    
-    const saved = localStorage.getItem('theme');
-    if (saved === 'dark') {
-        document.body.classList.add('dark-theme');
-        if (icon) icon.className = 'fas fa-sun';
-    }
-    
-    toggle.addEventListener('click', function() {
+    themeToggle.addEventListener('click', () => {
         document.body.classList.toggle('dark-theme');
         
         if (document.body.classList.contains('dark-theme')) {
@@ -434,221 +466,114 @@ function initThemeToggle() {
             localStorage.setItem('theme', 'light');
         }
     });
+    
+    // Load saved theme
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+        document.body.classList.add('dark-theme');
+        if (icon) icon.className = 'fas fa-sun';
+    }
 }
 
 // ===========================================
 // MOBILE MENU
 // ===========================================
-function initMobileMenu() {
-    const btn = document.querySelector('.mobile-menu-btn');
-    const nav = document.querySelector('.nav-links');
-    
-    if (!btn || !nav) return;
-    
-    btn.addEventListener('click', function() {
-        nav.classList.toggle('active');
-        const icon = btn.querySelector('i');
-        if (nav.classList.contains('active')) {
+
+const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+const navLinks = document.querySelector('.nav-links');
+
+if (mobileMenuBtn && navLinks) {
+    mobileMenuBtn.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        
+        const icon = mobileMenuBtn.querySelector('i');
+        if (navLinks.classList.contains('active')) {
             icon.className = 'fas fa-times';
         } else {
             icon.className = 'fas fa-bars';
         }
     });
-    
-    const links = document.querySelectorAll('.nav-link');
-    for (let i = 0; i < links.length; i++) {
-        links[i].addEventListener('click', function() {
-            nav.classList.remove('active');
-            const icon = btn.querySelector('i');
-            if (icon) icon.className = 'fas fa-bars';
-        });
-    }
 }
 
 // ===========================================
-// CONTACT FORM
+// CLOSE MOBILE MENU WHEN CLICKING LINKS
 // ===========================================
-function initContactForm() {
-    const form = document.getElementById('contactForm');
-    if (!form) return;
 
-form.addEventListener('submit', function(e) {
+document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+        navLinks?.classList.remove('active');
+        const icon = mobileMenuBtn?.querySelector('i');
+        if (icon) icon.className = 'fas fa-bars';
+    });
+});
+
+// ===========================================
+// ACTIVE NAVIGATION ON SCROLL
+// ===========================================
+
+const sections = document.querySelectorAll('section');
+const navItems = document.querySelectorAll('.nav-link');
+
+window.addEventListener('scroll', () => {
+    let current = '';
+    
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        
+        if (pageYOffset >= sectionTop - 200) {
+            current = section.getAttribute('id');
+        }
+    });
+    
+    navItems.forEach(item => {
+        item.classList.remove('active');
+        if (item.getAttribute('href') === $|{current}) {
+            item.classList.add('active');
+        }
+    });
+});
+
+// ===========================================
+// SMOOTH SCROLL FOR NAVIGATION
+// ===========================================
+
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
         e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+        }
+    });
+});
+
+// ===========================================
+// CONTACT FORM HANDLER
+// ===========================================
+
+const contactForm = document.getElementById('contactForm');
+if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+ e.preventDefault();
         
-        const name = document.getElementById('name');
-        const email = document.getElementById('email');
-        const interest = document.getElementById('interest');
-        const message = document.getElementById('message');
+        const name = document.getElementById('name')?.value;
+        const email = document.getElementById('email')?.value;
+        const interest = document.getElementById('interest')?.value;
+        const message = document.getElementById('message')?.value;
         
-        if (!name || !email || !interest || !message) return;
-        
-        if (name.value === '' || email.value === ''  ||interest.value === '' || message.value === '') {
-            alert('Please fill all fields');
+        if (!name || !email  ||!interest || !message) {
+            alert('Please fill in all fields');
             return;
         }
         
-        alert('✅ Message sent! Sadam will contact you soon at ' + email.value);
-        form.reset();
+        // Success message
+        alert('✅ Message sent! Sadam will get back to you soon.\n\nThank you for reaching out!');
+        contactForm.reset();
     });
 }
 
 // ===========================================
-// SCROLL EFFECTS
+// SCHEDULE CALL BUTTON
 // ===========================================
-function initScrollEffects() {
-    const sections = document.querySelectorAll('section');
-    const navLinks = document.querySelectorAll('.nav-link');
-    
-    if (sections.length > 0 && navLinks.length > 0) {
-        window.addEventListener('scroll', function() {
-            let current = '';
-            
-            for (let i = 0; i < sections.length; i++) {
-                const section = sections[i];
-                const sectionTop = section.offsetTop - 100;
-                if (window.scrollY >= sectionTop) {
-                    current = section.getAttribute('id');
-                }
-            }
-            
-            for (let i = 0; i < navLinks.length; i++) {
-                const link = navLinks[i];
-                link.classList.remove('active');
-                if (link.getAttribute('href') === '#' + current) {
-                    link.classList.add('active');
-                }
-            }
-        });
-    }
-    
-    const anchors = document.querySelectorAll('a[href^="#"]');
-    for (let i = 0; i < anchors.length; i++) {
-        anchors[i].addEventListener('click', function(e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({ behavior: 'smooth' });
-            }
-        });
-    }
-}
 
-// ===========================================
-// BACK TO TOP
-// ===========================================
-function initBackToTop() {
-    const btn = document.getElementById('backToTop');
-    if (!btn) return;
-    
-    window.addEventListener('scroll', function() {
-        if (window.scrollY > 500) {
-            btn.classList.add('show');
-        } else {
-            btn.classList.remove('show');
-        }
-    });
-    
-    btn.addEventListener('click', function() {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-}
-
-// ===========================================
-// STATS COUNTER
-// ===========================================
-function initStatsCounter() {
-    const statNumbers = document.querySelectorAll('.stat-card .stat-number');
-    let animated = false;
-    
-    function animateStats() {
-        if (animated) return;
-        
-        for (let i = 0; i < statNumbers.length; i++) {
-            const stat = statNumbers[i];
-            const target = parseInt(stat.getAttribute('data-target')) || parseInt(stat.textContent);
-            let count = 0;
-            
-            const interval = setInterval(function() {
-                if (count < target) {
-                    count++;
-                    stat.textContent = count;
-                } else {
-                    clearInterval(interval);
-                }
-            }, 50);
-        }
-        
-        animated = true;
-    }
-    
-    const statsSection = document.querySelector('.stats-grid');
-    if (statsSection) {
-        window.addEventListener('scroll', function() {
-            const rect = statsSection.getBoundingClientRect();
-            if (rect.top < window.innerHeight - 100) {
-                animateStats();
-            }
-        });
-    }
-}
-// ===========================================
-// HELPER FUNCTIONS
-// ===========================================
-function escapeHtml(text) {
-    var div = document.createElement('div');
-    div.textContent = text;
-    return div.innerHTML;
-}
-
-// ===========================================
-// ADD STYLES (if needed)
-// ===========================================
-(function addStyles() {
-    if (!document.getElementById('dynamic-styles')) {
-        var style = document.createElement('style');
-
-style.id = 'dynamic-styles';
-        style.textContent
-            .loading 
-                display: flex;
-                gap: 5|px;
-                justify-content| center;
-                padding: 10|px;
-};
-            
-            loading .dot 
-                width: 8|px;
-                height: 8|px;
-                background: rgba(207, 15, 207, 0.4)|f1;
-                border-radius| 50%
-                animation_bounce 1.4|s |infinite |ease-in-out both;
-            }
-            
-            .loading .dot:nth-child(1) { animation-delay: -0.32s; }
-            .loading .dot:nth-child(2) { animation-delay: -0.16s; };
-            
-            @keyframes bounce {
-                0%, 80%, 100% { transform: scale(0); }
-                40% { transform: scale(1); }
-            }
-            
-            .analysis-result {
-                background: rgba(99, 102, 241, 0.1);
-                padding: 1|rem;
-                border-radius| 8|px;
-                line-height| 1.6;
-            }
-            
-            pre {
-                background: #b32525;
-                color: #fff;
-                padding: 1|rem;
-                border-radius| 8|px;
-                overflow-x| auto;
-                white-space| pre-wrap;
-                word-wrap| break_word;
-            }
-        ;
-        document.head.appendChild(style);
-    }
-})();
