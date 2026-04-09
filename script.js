@@ -572,7 +572,28 @@ if (contactForm) {
         contactForm.reset();
     });
 }
+document.addEventListener("DOMContentLoaded", function () {
+  AOS.init({
+    duration: 1000,
+    once: true
+  });
+});
 
+// Remove loader after full load
+window.addEventListener("load", function () {
+  const loader = document.querySelector(".loader-wrapper");
+  if (loader) {
+    loader.style.display = "none";
+  }
+});
+window.addEventListener("scroll", function() {
+    const btn = document.getElementById("backToTop");
+    if (window.scrollY > 300) {
+        btn.classList.add("show");
+    } else {
+        btn.classList.remove("show");
+    }
+});
 // ===========================================
 // SCHEDULE CALL BUTTON
 // ===========================================
